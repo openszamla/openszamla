@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  # Development and the test suite run src/*.ts directly (TypeScript type stripping, on by default
+  # from Node.js 22.18.0): the oldest such version, the latest 22.x and 24.
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: ['22.18.0', 22, 24]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Skill copies up to date (plugin, Codex)
+        run: node scripts/sync-skills.mjs --check
+      - run: npm run build
+      - name: Smoke test of the build
+        run: node scripts/smoke.mjs
+
+  # The published package (npm pack → npm install) on the declared minimum runtime
+  # (package.json engines ">=22.13.0", mcpb/manifest.json runtimes) and on 24.
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: ['22.13.0', 24]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Pack
+        run: echo "TARBALL=$(npm pack --silent | tail -n 1)" >> "$GITHUB_ENV"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install the tarball
+        run: npm install --prefix install-smoke --no-audit --no-fund "./$TARBALL"
+      - name: Smoke test of the installed package
+        run: node scripts/smoke.mjs --package install-smoke/node_modules/openszamla

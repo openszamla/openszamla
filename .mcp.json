@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "openszamla-dev": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${CLAUDE_PROJECT_DIR:-.}/src/cli/main.ts", "mcp"],
+      "env": { "OPENSZAMLA_HOME": "${CLAUDE_PROJECT_DIR:-.}/.tmp/dev-data" }
+    }
+  }
+}

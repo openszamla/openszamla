@@ -1,0 +1,237 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/schemas/mcpb-manifest-v0.3.schema.json",
+  "manifest_version": "0.3",
+  "name": "openszamla",
+  "display_name": "OpenSzámla – magyar számlázó",
+  "version": "0.1.0",
+  "description": "Magyar számlázás AI-ügynökkel: számla, díjbekérő, sztornó, módosító számla, PDF, NAV Online Számla v3.",
+  "long_description": "Nyílt forráskódú, helyben futó számlázó program. Az adatok a gépeden maradnak (SQLite). Kiállítás csak előnézet és megerősítő kód után; a kiállított számlák megváltoztathatatlanok; a program minden számlát valós időben jelent a NAV-nak. Első lépés: kérdezd meg Claude-ot: „Mi a helyzet a számlázóval?” – megmondja, mi hiányzik még (eladói adatok, NAV technikai felhasználó). A NAV-kapcsolathoz technikai felhasználó kell (Online Számla, előbb a teszt rendszerben); az adatai itt vagy az „openszamla nav-setup” paranccsal adhatók meg. Futtatókörnyezet: Node.js 22.13 vagy újabb (a Claude Desktop beépítettje vagy a gépre telepített).",
+  "author": {
+    "name": "OpenSzámla közreműködők",
+    "url": "https://github.com/openszamla/openszamla"
+  },
+  "homepage": "https://github.com/openszamla/openszamla",
+  "documentation": "https://github.com/openszamla/openszamla/blob/v0.1.0/docs/felhasznaloi-dokumentacio.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openszamla/openszamla"
+  },
+  "license": "MIT",
+  "keywords": [
+    "szamlazas",
+    "szamla",
+    "nav",
+    "invoice",
+    "hungary"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/cli/main.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/cli/main.js",
+        "mcp"
+      ],
+      "env": {
+        "OPENSZAMLA_HOME": "${user_config.data_dir}",
+        "OPENSZAMLA_NAV_ENV": "${user_config.nav_env}",
+        "OPENSZAMLA_NAV_LOGIN": "${user_config.nav_login}",
+        "OPENSZAMLA_NAV_PASSWORD": "${user_config.nav_password}",
+        "OPENSZAMLA_NAV_SIGNING_KEY": "${user_config.nav_signing_key}",
+        "OPENSZAMLA_NAV_EXCHANGE_KEY": "${user_config.nav_exchange_key}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "setup_status",
+      "description": "Beállítások, NAV-kapcsolat, teendők"
+    },
+    {
+      "name": "seller_update",
+      "description": "Eladó adatai és alapértelmezések"
+    },
+    {
+      "name": "series_manage",
+      "description": "Sorszámtartományok"
+    },
+    {
+      "name": "taxpayer_lookup",
+      "description": "Adószám-lekérdezés a NAV-tól"
+    },
+    {
+      "name": "customer_save",
+      "description": "Vevő mentése"
+    },
+    {
+      "name": "customer_find",
+      "description": "Vevők keresése"
+    },
+    {
+      "name": "product_save",
+      "description": "Termék / szolgáltatás mentése"
+    },
+    {
+      "name": "product_find",
+      "description": "Termékek keresése"
+    },
+    {
+      "name": "invoice_draft",
+      "description": "Számla piszkozat és előnézet"
+    },
+    {
+      "name": "invoice_get",
+      "description": "Számla részletei"
+    },
+    {
+      "name": "invoice_list",
+      "description": "Számlák listája"
+    },
+    {
+      "name": "invoice_issue",
+      "description": "Számla kiállítása (visszafordíthatatlan)"
+    },
+    {
+      "name": "invoice_cancel_preview",
+      "description": "Sztornó előnézet"
+    },
+    {
+      "name": "invoice_cancel",
+      "description": "Sztornó (visszafordíthatatlan)"
+    },
+    {
+      "name": "invoice_correct",
+      "description": "Módosító számla piszkozat"
+    },
+    {
+      "name": "invoice_delete_draft",
+      "description": "Piszkozat törlése"
+    },
+    {
+      "name": "invoice_record_payment",
+      "description": "Befizetés rögzítése"
+    },
+    {
+      "name": "invoice_pdf",
+      "description": "Számla PDF"
+    },
+    {
+      "name": "nav_sync",
+      "description": "NAV Online Számla jelentés és státusz"
+    },
+    {
+      "name": "nav_send_to_configured_environment",
+      "description": "A másik NAV-rendszerhez tartozó (pl. csak a TESZT rendszerbe jelentett) számla beküldése a beállított rendszerbe – visszafordíthatatlan, megerősítő kóddal"
+    },
+    {
+      "name": "exchange_rate",
+      "description": "MNB árfolyam"
+    },
+    {
+      "name": "report_summary",
+      "description": "Időszaki összesítő"
+    },
+    {
+      "name": "export_invoices",
+      "description": "Export könyvelőnek"
+    },
+    {
+      "name": "tax_audit_export",
+      "description": "Adóhatósági ellenőrzési adatszolgáltatás (export)"
+    },
+    {
+      "name": "audit_log",
+      "description": "Auditnapló"
+    },
+    {
+      "name": "backup_create",
+      "description": "Adatbázis mentése"
+    },
+    {
+      "name": "verify_integrity",
+      "description": "Adatbázis ellenőrzése"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "szamla_kiallitas",
+      "description": "Végigvezet egy számla kiállításán: vevő, tételek, ellenőrzés, jóváhagyás, kiállítás, PDF, NAV.",
+      "arguments": [
+        "vevo",
+        "tetelek"
+      ],
+      "text": "Állíts ki egy számlát az OpenSzámla eszközeivel. Vevő: ${arguments.vevo}. Tételek: ${arguments.tetelek}.\n1) setup_status – ellenőrizd az eladói beállításokat és a NAV-kapcsolatot.\n2) Keresd meg a vevőt (customer_find); magyar cégnél használd a taxpayer_lookup-ot; ha nincs, mentsd (customer_save).\n3) Készíts piszkozatot (invoice_draft). Ha valami hiányzik (ár, ÁFA-kód, teljesítés dátuma, fizetési mód), kérdezz rá – ne találgass.\n4) Mutasd meg az előnézetet (vevő, tételek, nettó/ÁFA/bruttó, dátumok, megjegyzések, figyelmeztetések), és kérj kifejezett jóváhagyást.\n5) Jóváhagyás után invoice_issue a piszkozat azonosítójával és a megerősítő kóddal; utána add meg a sorszámot, a PDF útvonalát és a NAV-állapotot."
+    },
+    {
+      "name": "havi_zaras",
+      "description": "Havi összesítő a könyvelőnek: forgalom, ÁFA, kintlévőségek, NAV-problémák, export.",
+      "arguments": [
+        "honap"
+      ],
+      "text": "Készíts havi zárást a(z) ${arguments.honap} hónapra az OpenSzámla eszközeivel:\n1) report_summary a hónap első és utolsó napjával, dateBasis: \"fulfillment\" – az ÁFA főszabály szerint a teljesítés napján keletkezik, így a hónap végi teljesítésről a következő hónapban kiállított számla is ebbe a hónapba tartozik. Foglald össze a nettó/ÁFA/bruttó forgalmat ÁFA-kódonként, és írd mellé, hogy ez teljesítés szerinti összesítés (a kelte szerinti számlaforgalom ettől eltérhet). Ha az eladó pénzforgalmi elszámolású (a válasz notes mezője ezt jelzi), az ÁFA az ellenérték megtérülésekor (a befizetéskor) esedékes (Áfa tv. 196/B. §): mondd meg, hogy ez az összesítés nem a bevallandó adó, és kérd le a befizetés szerintit is (report_summary dateBasis: \"payment\" – a hónap befizetései a pénzforgalmi elszámolással kiállított bizonylatokon, arányos ÁFA-val, a notes figyelmeztetéseivel); a bevallandó adót a könyvelő állapítja meg.\n2) invoice_list overdue: true – sorold fel a lejárt, kifizetetlen számlákat.\n3) invoice_list a nem \"done\" NAV-állapotú számlákra – ha van, javasolj nav_sync-et.\n4) export_invoices csv formátumban a könyvelőnek ugyanarra a hónapra, dateBasis: \"fulfillment\", és add meg a fájl útvonalát; jelezd, hogy a válogatás a teljesítés dátuma szerinti (a CSV-ben a kelte és a teljesítés dátuma is szerepel). Pénzforgalmi elszámolású eladónál a hónap befizetési naplóját is (export_invoices ledger: true)."
+    },
+    {
+      "name": "nav_hibaelharitas",
+      "description": "Megkeresi a NAV-nak nem vagy hibásan jelentett számlákat, és javaslatot tesz a javításra.",
+      "text": "Ellenőrizd a NAV Online Számla jelentéseket:\n1) setup_status – be van-e állítva (és használható-e) a NAV-kapcsolat, melyik környezet (teszt/éles – teszt környezetben valódi adatszolgáltatás nem történik), és mit írnak a teendők.\n2) invoice_list navStatus: [\"pending\",\"processing\",\"aborted\",\"error\",\"not_configured\"].\n3) Minden problémás számlánál nézd meg a navMessages-t (invoice_get), és magyarázd el közérthetően.\n4) Átmeneti hibánál futtass nav_sync-et (a bizonytalan kimenetelű beküldést és az ismétlésként – INVOICE_NUMBER_NOT_UNIQUE – elutasítottat a nav_sync maga egyezteti a NAV-val). Ha a NAV elutasította (aborted), vagy végleges hiba (error) történt: hárítsd el az okát (pl. beállítás javítása, programfrissítés), majd küldd újra ugyanazt a számlát: nav_sync resubmitFailed: true – a hozzá tartozó módosító és sztornó számlák csak ezután jelenthetők. Ha az egyeztetéshez a NAV lekérdezése végleges hibát ad (OPENSZAMLA_RECONCILE_BLOCKED, pl. a technikai felhasználónak nincs lekérdezési jogosultsága), előbb azt kell elhárítani. Sorszám-ütközésnél (OPENSZAMLA_NUMBER_COLLISION: a NAV-nál a sorszámon egy másik számla szerepel, pl. visszaállított mentés miatt) az újraküldés nem segít: magyarázd el az üzenetet, és javasolj szakértői segítséget. Elutasított jelentést ne kerülj meg sztornóval és új számlával: a sztornót sem fogadja be a NAV, amíg az eredeti nincs nála. Kiállított számlát módosítani nem lehet; ha a NAV a számla adata miatt utasítja el, és a beállítás javítása sem segít, javasolj szakértői segítséget (könyvelő, NAV ügyfélszolgálat)."
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=22.13.0"
+    }
+  },
+  "user_config": {
+    "data_dir": {
+      "type": "directory",
+      "title": "Adatkönyvtár",
+      "description": "A számlák adatbázisa, a PDF-ek, az exportok és a NAV-beállítás mappája – mentsd rendszeresen. Ha a parancssort is használod, ugyanezt a mappát add meg neki (--data-dir).",
+      "required": true,
+      "default": "${HOME}/.openszamla"
+    },
+    "nav_env": {
+      "type": "string",
+      "title": "NAV környezet",
+      "description": "test (a NAV próbarendszere – nem valódi adatszolgáltatás) vagy production (éles); a két rendszerhez külön technikai felhasználó tartozik. Üresen hagyva az „openszamla nav-setup” által mentett környezet érvényes (ha az sincs: test); kitöltve felülírja azt.",
+      "default": "",
+      "required": false
+    },
+    "nav_login": {
+      "type": "string",
+      "title": "NAV technikai felhasználó",
+      "description": "A technikai felhasználó login neve (Online Számla → NAV Felhasználókezelő). Üresen hagyva az „openszamla nav-setup --data-dir <adatkönyvtár>” által mentett nav-credentials.json adatai érvényesek (ha van ilyen).",
+      "required": false,
+      "default": ""
+    },
+    "nav_password": {
+      "type": "string",
+      "title": "NAV jelszó",
+      "description": "A technikai felhasználó jelszava",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    },
+    "nav_signing_key": {
+      "type": "string",
+      "title": "XML aláírókulcs",
+      "description": "A technikai felhasználó XML aláírókulcsa",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    },
+    "nav_exchange_key": {
+      "type": "string",
+      "title": "XML cserekulcs",
+      "description": "A technikai felhasználó XML cserekulcsa (16 karakter)",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    }
+  }
+}

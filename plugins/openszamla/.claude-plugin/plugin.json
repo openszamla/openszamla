@@ -1,0 +1,25 @@
+{
+  "name": "openszamla",
+  "displayName": "OpenSzámla",
+  "version": "0.1.0",
+  "description": "Nyílt forráskódú magyar számlázó: számla kiállítás, díjbekérő, sztornó, módosító számla, PDF, NAV Online Számla v3 – MCP szerver és skill",
+  "author": { "name": "OpenSzámla közreműködők", "url": "https://github.com/openszamla/openszamla" },
+  "homepage": "https://github.com/openszamla/openszamla",
+  "repository": "https://github.com/openszamla/openszamla",
+  "license": "MIT",
+  "keywords": ["szamlazas", "szamla", "nav", "online-szamla", "invoice", "mcp"],
+  "userConfig": {
+    "data_dir": {
+      "type": "directory",
+      "title": "Adatkönyvtár",
+      "description": "Az adatbázis, a PDF-ek és az exportok helye (alapértelmezés: ~/.openszamla). Ha megadod, a NAV-adatokat is ide mentsd: npx -y openszamla nav-setup --data-dir <ez a mappa>",
+      "required": false
+    },
+    "nav_env": {
+      "type": "string",
+      "title": "NAV környezet",
+      "description": "test vagy production. Üresen hagyva az „openszamla nav-setup” által mentett környezet érvényes (ha az sincs: test); kitöltve felülírja azt",
+      "required": false
+    }
+  }
+}

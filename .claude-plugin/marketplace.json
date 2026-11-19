@@ -1,0 +1,14 @@
+{
+  "name": "openszamla",
+  "description": "OpenSzámla – nyílt forráskódú magyar számlázó MCP szerver és skill (NAV Online Számla v3)",
+  "owner": { "name": "OpenSzámla közreműködők", "url": "https://github.com/openszamla/openszamla" },
+  "plugins": [
+    {
+      "name": "openszamla",
+      "source": "./plugins/openszamla",
+      "description": "Magyar számlázás Claude-dal: számla, díjbekérő, sztornó, módosító számla, PDF, NAV Online Számla",
+      "category": "productivity",
+      "tags": ["szamlazas", "szamla", "nav", "invoice", "hungary"]
+    }
+  ]
+}

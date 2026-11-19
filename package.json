@@ -1,0 +1,77 @@
+{
+  "name": "openszamla",
+  "version": "0.1.0",
+  "description": "Nyílt forráskódú magyar számlázó program MCP szerverrel – Claude és Codex által kezelhető, NAV Online Számla integrációval.",
+  "keywords": [
+    "számla",
+    "számlázó",
+    "invoice",
+    "hungary",
+    "nav",
+    "online-szamla",
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "codex"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/openszamla/openszamla#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openszamla/openszamla.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openszamla/openszamla/issues"
+  },
+  "type": "module",
+  "bin": {
+    "openszamla": "dist/cli/main.js"
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "docs/felhasznaloi-dokumentacio.md",
+    "docs/jogi-megfeleles.md",
+    "docs/nav-beallitas.md",
+    "docs/kliensek.md",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:mcpb": "node scripts/build-mcpb.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "smoke": "node scripts/smoke.mjs",
+    "dev": "node src/cli/main.ts",
+    "mcp": "node src/cli/main.ts mcp",
+    "serve": "node src/cli/main.ts serve",
+    "prepublishOnly": "npm run typecheck && npm test && node scripts/sync-skills.mjs --check && npm run build && node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "^2.1.2",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "decimal.js": "^10.6.0",
+    "fast-xml-parser": "^5.11.2",
+    "pdfmake": "^0.3.13",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@types/node": "^24.19.2",
+    "@types/pdfmake": "^0.3.3",
+    "pdf-parse": "^2.4.5",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5",
+    "xmllint-wasm": "^5.3.0"
+  }
+}
