@@ -675,12 +675,17 @@ describe('NavClient – secrets never leak', () => {
     await collect(client({ credentials: { ...nav.credentials, signingKey: 'wrong-signing-key-0000000000000' } }).tokenExchange());
     nav.failNext({ kind: 'HTTP_500' }, { operation: 'manageInvoice' });
     await collect(client().manageInvoice([item(1, INVOICE_DOMESTIC)]));
+    // Only manageInvoice hangs. The time limit applies to the token exchange before it too: it has to be long enough for
+    // that exchange on a slow, busy machine (200 ms was not on a CI runner – the client gave up before manageInvoice was
+    // sent, and the fault stayed armed for the submission below).
     nav.failNext({ kind: 'TIMEOUT' }, { operation: 'manageInvoice' });
-    await collect(client({ timeoutMs: 200 }).manageInvoice([item(1, INVOICE_DOMESTIC)]));
+    await collect(client({ timeoutMs: 2000 }).manageInvoice([item(1, INVOICE_DOMESTIC)]));
     nav.failNext({ kind: 'MAINTENANCE' });
     await collect(client().queryTaxpayer('87654323'));
     for (const e of errors) expectNoSecrets(errorTexts(e));
 
+    // Whatever the load did to the scenarios above, no fault is left for the submission that has to succeed.
+    nav.clearFaults();
     const ok = await submitAndWait(client(), [item(1, INVOICE_DOMESTIC)]);
     expectNoSecrets(ok.responseXml);
   });
