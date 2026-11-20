@@ -11,6 +11,8 @@ import { describe, expect, it } from 'vitest';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const read = (path: string): string => readFileSync(join(ROOT, path), 'utf8');
+/** The version the package file of the quick start is named after. */
+const VERSION = (JSON.parse(read('package.json')) as { version: string }).version;
 
 /** The fenced blocks of a Markdown file: [language, lines]. */
 function blocks(md: string): Array<{ lang: string; lines: string[] }> {
@@ -53,8 +55,8 @@ describe('the quick start works in a default Windows PowerShell (U1)', () => {
   const sh = all.filter((b) => b.lang === 'bash').flatMap((b) => b.lines);
 
   it('PowerShell blocks use the .cmd starters, the macOS / Linux blocks the plain commands', () => {
-    expect(ps).toEqual(['npm.cmd install -g openszamla', 'npm.cmd install -g .\\openszamla-0.1.0.tgz', 'openszamla.cmd setup']);
-    expect(sh).toEqual(['npm install -g openszamla', 'npm install -g ./openszamla-0.1.0.tgz', 'openszamla setup']);
+    expect(ps).toEqual(['npm.cmd install -g openszamla', `npm.cmd install -g .\\openszamla-${VERSION}.tgz`, 'openszamla.cmd setup']);
+    expect(sh).toEqual(['npm install -g openszamla', `npm install -g ./openszamla-${VERSION}.tgz`, 'openszamla setup']);
     for (const l of ps) expect(l, l).toMatch(/^(npm|openszamla)\.cmd /);
   });
 

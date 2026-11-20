@@ -37,3 +37,14 @@ Kísérletezéshez mindig külön adatkönyvtárat használj: `OPENSZAMLA_HOME=/
 3. Írd le a PR-ben, mi változott a felhasználó (és a NAV-adatszolgáltatás) szempontjából.
 
 Biztonsági hibát ne nyilvános issue-ban jelents: lásd [SECURITY.md](SECURITY.md).
+
+## Kiadás (karbantartóknak)
+
+1. Verzió: `npm version <új> --no-git-tag-version`, és ugyanez a szám a `mcpb/manifest.json`, a
+   `plugins/openszamla` (plugin.json, `.mcp.json`, README), a README és a felhasználói dokumentáció megfelelő
+   helyein; új szakasz a CHANGELOG.md-ben. Az `npm test` jelzi, ha valamelyik kimaradt.
+2. Zöld CI a `main` ágon, utána annotált címke (`vX.Y.Z`) és GitHub-kiadás a címke friss másolatában készült
+   `npm run build:mcpb` és `npm pack` eredményével.
+3. npm: a címke **friss másolatának mappájában** `npm publish`. Ne csomagfájl útvonalával tedd közzé
+   (`npm publish valami.tgz`): az npm ilyenkor a fájl helyi útvonalát is rögzíti a változat nyilvános adataiban. A
+   közzétételhez kétlépcsős azonosítás kell, és terminálból kell futtatni, mert az npm ott kéri a jóváhagyást.

@@ -116,6 +116,9 @@ describe('release metadata', () => {
     expect(readme).toContain(DOC_URL);
     expect(readme).toContain('OPENSZAMLA-0000001');
     expect(read('plugins/openszamla/README.md')).toContain(DOC_URL);
+    expect(read('docs/felhasznaloi-dokumentacio.md')).toContain(`| Verzió | ${pkg.version as string} (`);
+    expect(read('CHANGELOG.md')).toContain(`\n## [${pkg.version as string}] – `);
+    expect(json('package-lock.json').version).toBe(pkg.version);
   });
 
   it('extension and plugin options left empty do not override the NAV environment chosen in nav-setup', () => {

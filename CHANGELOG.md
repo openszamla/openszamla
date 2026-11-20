@@ -4,6 +4,16 @@ A formátum a [Keep a Changelog](https://keepachangelog.com/hu/1.1.0/) ajánlás
 [SemVer](https://semver.org/lang/hu/). A számlázó program azonosítója (NAV `softwareId`):
 `OPENSZAMLA-0000001`.
 
+## [0.1.1] – 2026-11-20
+
+A 0.1.0 újrakiadása; a program működése változatlan.
+
+### Csomag
+
+- Az npm-csomag újra lett közzétéve, mert a 0.1.0 közzétételi adataiba a csomagfájl helyi útvonala is bekerült (az npm ezt rögzíti, ha a közzététel csomagfájl útvonalával történik). A 0.1.0-s npm-változat vissza lett vonva; a GitHub-kiadás 0.1.0-s fájljait ez nem érintette.
+- A CONTRIBUTING.md leírja a kiadás lépéseit: az npm-re a címke friss másolatának mappájából kell közzétenni.
+- Teszt veti össze a `package.json` verziójával mindazt a helyet, ahol a verziószám vagy a csomagfájl neve szerepel (README, felhasználói dokumentáció, változásnapló, bővítmény- és pluginleíró).
+
 ## [0.1.0] – 2026-11-20
 
 Első nyilvános változat.

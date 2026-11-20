@@ -26,5 +26,5 @@ Beállítások (`/plugin` → *Configure*):
   `production`) érvényes. Ha itt megadod (`test` vagy `production`), az **felülírja** a `nav-setup`
   választását.
 
-Dokumentáció: https://github.com/openszamla/openszamla/blob/v0.1.0/docs/felhasznaloi-dokumentacio.md
+Dokumentáció: https://github.com/openszamla/openszamla/blob/v0.1.1/docs/felhasznaloi-dokumentacio.md
 (az MCP-kliensek beállítása: `docs/kliensek.md`).

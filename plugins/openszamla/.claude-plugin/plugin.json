@@ -1,7 +1,7 @@
 {
   "name": "openszamla",
   "displayName": "OpenSzámla",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Nyílt forráskódú magyar számlázó: számla kiállítás, díjbekérő, sztornó, módosító számla, PDF, NAV Online Számla v3 – MCP szerver és skill",
   "author": { "name": "OpenSzámla közreműködők", "url": "https://github.com/openszamla/openszamla" },
   "homepage": "https://github.com/openszamla/openszamla",

@@ -3,7 +3,7 @@
     "openszamla": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "openszamla@0.1.0", "mcp"],
+      "args": ["-y", "openszamla@0.1.1", "mcp"],
       "env": {
         "OPENSZAMLA_HOME": "${user_config.data_dir}",
         "OPENSZAMLA_NAV_ENV": "${user_config.nav_env}"

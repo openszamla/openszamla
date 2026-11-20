@@ -67,13 +67,13 @@ Amíg a csomag nem érhető el az npm-en, csomagfájlból telepíthető: a kapot
 Windowson:
 
 ```powershell
-npm.cmd install -g .\openszamla-0.1.0.tgz
+npm.cmd install -g .\openszamla-0.1.1.tgz
 ```
 
 macOS-en és Linuxon:
 
 ```bash
-npm install -g ./openszamla-0.1.0.tgz
+npm install -g ./openszamla-0.1.1.tgz
 ```
 
 Forráskódból, fejlesztéshez: a letöltött mappában `npm install`, `npm run build`, majd `npm link`
@@ -192,8 +192,8 @@ szerver; programkönyvtárként (`import`) nem használható.
 A program neve **OpenSzámla**, azonosítója (NAV `softwareId`) **OPENSZAMLA-0000001**; a telepített
 változat számát az `openszamla --version` írja ki. A változathoz tartozó felhasználói dokumentáció
 és a változásnapló a telepített csomag része (`docs/felhasznaloi-dokumentacio.md`, `CHANGELOG.md` –
-a csomag mappája: `npm root -g` → `openszamla`), a 0.1.0-s változaté online is:
-https://github.com/openszamla/openszamla/blob/v0.1.0/docs/felhasznaloi-dokumentacio.md
+a csomag mappája: `npm root -g` → `openszamla`), a 0.1.1-es változaté online is:
+https://github.com/openszamla/openszamla/blob/v0.1.1/docs/felhasznaloi-dokumentacio.md
 
 ## Első beállítás kézzel
 

@@ -3,7 +3,7 @@
   "manifest_version": "0.3",
   "name": "openszamla",
   "display_name": "OpenSzámla – magyar számlázó",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Magyar számlázás AI-ügynökkel: számla, díjbekérő, sztornó, módosító számla, PDF, NAV Online Számla v3.",
   "long_description": "Nyílt forráskódú, helyben futó számlázó program. Az adatok a gépeden maradnak (SQLite). Kiállítás csak előnézet és megerősítő kód után; a kiállított számlák megváltoztathatatlanok; a program minden számlát valós időben jelent a NAV-nak. Első lépés: kérdezd meg Claude-ot: „Mi a helyzet a számlázóval?” – megmondja, mi hiányzik még (eladói adatok, NAV technikai felhasználó). A NAV-kapcsolathoz technikai felhasználó kell (Online Számla, előbb a teszt rendszerben); az adatai itt vagy az „openszamla nav-setup” paranccsal adhatók meg. Futtatókörnyezet: Node.js 22.13 vagy újabb (a Claude Desktop beépítettje vagy a gépre telepített).",
   "author": {
@@ -11,7 +11,7 @@
     "url": "https://github.com/openszamla/openszamla"
   },
   "homepage": "https://github.com/openszamla/openszamla",
-  "documentation": "https://github.com/openszamla/openszamla/blob/v0.1.0/docs/felhasznaloi-dokumentacio.md",
+  "documentation": "https://github.com/openszamla/openszamla/blob/v0.1.1/docs/felhasznaloi-dokumentacio.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/openszamla/openszamla"

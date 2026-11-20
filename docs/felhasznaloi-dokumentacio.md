@@ -4,7 +4,7 @@
 |---|---|
 | Program neve | OpenSzámla |
 | Azonosító (NAV `softwareId`) | `OPENSZAMLA-0000001` (telepítésenként felülírható: `OPENSZAMLA_SOFTWARE_ID`) |
-| Verzió | 0.1.0 (a futó verzió: `openszamla --version`) |
+| Verzió | 0.1.1 (a futó verzió: `openszamla --version`) |
 | Működési típus | helyben futó program (`LOCAL_SOFTWARE`) |
 | Fejlesztő | OpenSzámla közreműködők – https://github.com/openszamla/openszamla |
 | Licenc | MIT (a harmadik féltől származó összetevőké: `THIRD-PARTY-NOTICES`) |
